@@ -27,11 +27,11 @@ jobs:
       - name: Find Dockerfiles
         id: find-dockerfiles
         run: |
-          DOCKERFILES=$(find custom-operators -name Dockerfile)
-          echo "dockerfiles=$DOCKERFILES" >> $GITHUB_ENV
+          DOCKERFILES=$(find custom-operators -name Dockerfile | tr '\n' ' ')
+          echo "DOCKERFILES=$DOCKERFILES" >> $GITHUB_ENV
 
       - name: Build and Push Images
-        if: env.dockerfiles != ''
+        if: env.DOCKERFILES != ''
         run: |
           for dockerfile in $DOCKERFILES; do
             folder=$(dirname "$dockerfile")
