@@ -1,0 +1,41 @@
+default:
+  image: docker:20.10.22-git
+  services:
+    - name: docker:20.10.22-dind
+  tags:
+    - privileged
+    - amd64
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+variables:
+  MQTT_CONNECTION: ${CI_REGISTRY_IMAGE}:mqtt_connection
+  MQTT_CONNECTION_BRANCH: ${MQTT_CONNECTION}_${CI_COMMIT_REF_SLUG}
+  OBJECT_DETECTION: ${CI_REGISTRY_IMAGE}:object_detection
+  OBJECT_DETECTION_BRANCH: ${OBJECT_DETECTION}_${CI_COMMIT_REF_SLUG}
+  OBJECT_FUSION: ${CI_REGISTRY_IMAGE}:object_fusion
+  OBJECT_FUSION_BRANCH: ${OBJECT_FUSION}_${CI_COMMIT_REF_SLUG}
+
+stages:
+  - build mqtt connection
+  - build object detection
+  - build object fusion
+
+build-mqtt-connection:
+  stage: build mqtt connection
+  script:
+    - cd custom-operators/mqtt-connection
+    - docker build -t ${MQTT_CONNECTION_BRANCH} .
+    - docker push ${MQTT_CONNECTION_BRANCH}  
+build-object-detection:
+  stage: build object detection
+  script:
+    - cd custom-operators/object-detection
+    - docker build -t ${OBJECT_DETECTION_BRANCH} .
+    - docker push ${OBJECT_DETECTION_BRANCH}
+build-object-fusion:
+  stage: build object fusion
+  script:
+    - cd custom-operators/object-fusion
+    - docker build -t ${OBJECT_FUSION_BRANCH} .
+    - docker push ${OBJECT_FUSION_BRANCH}

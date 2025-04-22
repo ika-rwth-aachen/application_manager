@@ -1,0 +1,116 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  # <plural>.<group>
+  name: objectfusions.ika.rwth-aachen.de
+spec:
+  group: ika.rwth-aachen.de
+  # list of versions supported by this CustomResourceDefinition
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec: 
+              type: object
+              properties:
+                operator: 
+                  type: object
+                  properties:
+                    namespace:
+                      type: string 
+                      description: Kubernetes namespace
+                    requester: 
+                      type: array
+                      items:
+                        type: string
+                      description: stores the requesters
+                    shutdown:
+                      type: boolean
+                    topicsEgoData: 
+                      type: array
+                      items:
+                        type: string
+                    topicsObjectlist: 
+                      type: array
+                      items:
+                        type: string
+                fusion: 
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                    commandOverride: 
+                      type: array
+                      items: 
+                        type: string
+                    replicaCount:
+                      type: integer
+                    labelTag:
+                      type: string
+                    resourceLabels: 
+                      type: object
+                      additionalProperties:
+                        type: string
+                    terminationGracePeriodSeconds:
+                      type: integer
+                    image: 
+                      type: object
+                      properties:
+                        repository: 
+                          type: string
+                        tag: 
+                          type: string
+                    nodeSelector:
+                      type: object
+                      additionalProperties:
+                        type: string
+                    configFusion:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                      description: stores the configuration
+                watcher:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                    commandOverride: 
+                      type: array
+                      items: 
+                        type: string
+                    replicaCount:
+                      type: integer
+                    labelTag:
+                      type: string
+                    resourceLabels: 
+                      type: object
+                      additionalProperties:
+                        type: string
+                    terminationGracePeriodSeconds:
+                      type: integer
+                    image:
+                      type: object
+                      properties:
+                        repository: 
+                          type: string
+                        tag: 
+                          type: string
+                    nodeSelector:
+                      type: object
+                      additionalProperties:
+                        type: string
+                    configWatcher:
+                      type: object
+                      x-kubernetes-preserve-unknown-fields: true
+                      description: stores the configuration
+  # either Namespaced or Cluster
+  scope: Namespaced
+  names:
+    plural: objectfusions
+    singular: objectfusion
+    kind: ObjectFusion
+    shortNames:
+    - of

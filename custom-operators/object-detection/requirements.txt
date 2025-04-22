@@ -1,0 +1,4 @@
+aiofiles
+kopf
+kubernetes_asyncio
+pyhelm3

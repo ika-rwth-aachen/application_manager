@@ -1,0 +1,17 @@
+nodes:
+  cloud:
+    - mqtt_client:latest
+    - kopf_mqtt_operator:latest
+    - kopf_object_detection_operator:latest
+    - kopf_object_fusion_operator:latest
+  edge:
+    - k8s_configmap_watcher:latest
+    - mqtt_client:latest
+    - object_fusion:latest
+    - point_cloud_object_detection:latest
+  station00:
+    - mqtt_client:latest
+  vehicle00:
+    - mqtt_client:latest
+  vehicle01:
+    - mqtt_client:latest

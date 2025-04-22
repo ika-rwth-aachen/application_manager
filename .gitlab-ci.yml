@@ -1,0 +1,20 @@
+stages:
+  - application-manager
+  - custom-operators
+
+application-manager:
+  stage: application-manager
+  trigger:
+    include:
+      - remote: https://raw.githubusercontent.com/ika-rwth-aachen/docker-ros/main/.gitlab-ci/docker-ros.yml
+    strategy: depend
+  variables:
+    BASE_IMAGE: rwthika/ros2:humble
+    PLATFORM: arm64,amd64
+    COMMAND: ros2 launch application_manager application_manager.launch.py
+    TARGET: dev,run
+
+custom-operators:
+  stage: custom-operators
+  trigger:
+    include: custom-operators/.gitlab-ci.yml

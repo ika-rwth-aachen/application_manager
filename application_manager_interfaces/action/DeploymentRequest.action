@@ -1,0 +1,11 @@
+# Request/Goal: A request message is sent from an action client to an action server initiating a new goal.
+Application[] apps
+Connection[] connections
+string id
+bool shutdown
+---
+# Result: A result message is sent from an action server to an action client when a goal is done.
+string message
+---
+# Feedback: Feedback messages are periodically sent from an action server to an action client with updates about a goal.
+string message
