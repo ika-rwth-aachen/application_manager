@@ -5,9 +5,9 @@ CONFIGMAP_WATCHER_IMAGE="rwthika/robotkube-k8s-configmap-watcher:2025-04"
 MQTT_CLIENT="rwthika/robotkube-mqtt-client:2025-04"
 OBJECT_DETECTION_IMAGE="rwthika/robotkube-object-detection:2025-04"
 OBJECT_FUSION_IMAGE="rwthika/robotkube-object-fusion:2025-04"
-KOPF_OPERATOR_MQTT="rwthika/robotkube-custom-operator-mqtt-connection:2025-04"
-KOPF_OPERATOR_OBJECT_DETECTION="rwthika/robotkube-custom-operator-object-detection:2025-04"
-KOPF_OPERATOR_OBJECT_FUSION="rwthika/robotkube-custom-operator-object-fusion:2025-04"
+KOPF_OPERATOR_MQTT="ghcr.io/ika-rwth-aachen/application_manager/custom-operator/mqtt-connection:latest"
+KOPF_OPERATOR_OBJECT_DETECTION="ghcr.io/ika-rwth-aachen/application_manager/custom-operator/object-detection:latest"
+KOPF_OPERATOR_OBJECT_FUSION="ghcr.io/ika-rwth-aachen/application_manager/custom-operator/object-fusion:latest"
 
 # Define target image names used in the registry
 declare -A TARGET_IMAGE_NAMES=(
