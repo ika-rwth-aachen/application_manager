@@ -1,0 +1,15 @@
+name: docker-ros
+
+on: push
+
+jobs:
+
+  ros2-humble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ika-rwth-aachen/docker-ros@main
+        with:
+          platform: amd64
+          target: run
+          base-image: rwthika/ros2:humble
+          command: ros2 launch application_manager application_manager.launch.py

@@ -9,6 +9,10 @@
   <a href="https://github.com/ika-rwth-aachen/application_manager"><img src="https://img.shields.io/github/stars/ika-rwth-aachen/application_manager?style=social"/></a>
 </p>
 
+<p align="center">
+⸻ <b><i><a href="#quick-start">Quick Start</a></i></b> | <b><i><a href="#installation">Installation</a></i></b> | <b><i><a href="#documentation">Documentation</a></i></b> | <b><i><a href="#research-article">Research Article</a></i></b> | <b><i><a href="#acknowledgements">Acknowledgements</a></i></b> ⸻
+</p>
+
 With this repository, we provide a reference implementation of our application management framework which is conceptualized in the research article mentioned below. The framework consists of the components *application manager* and the *custom operators*. The framework enables the demand-driven deployment, reconfiguration, and shutdown of applications in a Kubernetes cluster.
 
 The repository contains the following components:
@@ -19,7 +23,7 @@ The repository contains the following components:
 The reference implementation contains the *Object Detection Fusion* application enabling collective environment perception. This application is applied in the experiment described in our research article mentioned below. The logic is extensible for new applications.
 
 <p align="center">
-  <img src="assets/application_management.png" alt="Image Description" width="80%">
+  <img src="assets/application_management.png" alt="Image Description" width="100%">
 </p>
 
 The image above illustrates the architecture of the application management framework. The application manager and the custom operators are brought into action in the use case ["Collective Perception at Intersection"](https://github.com/ika-rwth-aachen/robotkube/tree/main/use-cases/collective-perception-intersection) in the scope of [**RobotKube**](https://github.com/ika-rwth-aachen/robotkube). We invite you to check out the code and run the use case.
