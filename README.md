@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/github/v/release/ika-rwth-aachen/application_manager"/>
   <img src="https://img.shields.io/github/license/ika-rwth-aachen/application_manager"/>
   <a href="https://github.com/ika-rwth-aachen/application_manager/actions/workflows/docker-ros.yml"><img src="https://github.com/ika-rwth-aachen/application_manager/actions/workflows/docker-ros.yml/badge.svg"/></a>
-  <a href="https://ika-rwth-aachen.github.io/application_manager/"><img src="https://github.com/ika-rwth-aachen/application_manager/actions/workflows/doc.yml/badge.svg"/></a>
+  <a href="https://github.com/ika-rwth-aachen/application_manager/actions/workflows/custom-operators.yml"><img src="https://github.com/ika-rwth-aachen/application_manager/actions/workflows/custom-operators.yml/badge.svg"/></a>
   <img src="https://img.shields.io/badge/ROS 2-humble-293754"/>
   <a href="https://github.com/ika-rwth-aachen/application_manager"><img src="https://img.shields.io/github/stars/ika-rwth-aachen/application_manager?style=social"/></a>
 </p>
