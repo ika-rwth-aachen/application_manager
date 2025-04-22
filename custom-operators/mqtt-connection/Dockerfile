@@ -6,4 +6,5 @@ RUN apt-get update && \
 ADD ./requirements.txt /tmp/requirements.txt
 RUN pip install -r ./tmp/requirements.txt
 ADD ./operator /operator
+ADD ./operator/config.yml /config/config.yml
 CMD kopf run /operator/mqtt_connection_operator.py
