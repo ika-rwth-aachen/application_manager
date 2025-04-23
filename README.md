@@ -10,23 +10,23 @@
 </p>
 
 <p align="center">
-⸻ <b><i><a href="#quick-start">Quick Start</a></i></b> | <b><i><a href="#installation">Installation</a></i></b> | <b><i><a href="#documentation">Documentation</a></i></b> | <b><i><a href="#research-article">Research Article</a></i></b> | <b><i><a href="#acknowledgements">Acknowledgements</a></i></b> ⸻
+⸻ <b><i><a href="#quick-start">Quick Start</a></i></b> | <b><i><a href="#installation">Installation</a></i></b> | <b><i><a href="#documentation">Documentation</a></i></b> | <b><i><a href="#research-paper">Research Paper</a></i></b> | <b><i><a href="#acknowledgements">Acknowledgements</a></i></b> ⸻
 </p>
 
-With this repository, we provide a reference implementation of our application management framework which is conceptualized in the research article mentioned below. The framework consists of the components *application manager* and the *custom operators*. The framework enables the demand-driven deployment, reconfiguration, and shutdown of applications in a Kubernetes cluster.
+With this repository, we provide a reference implementation of our application management framework which is conceptualized in our [research paper](#research-paper). The framework consists of the components *application manager* and the *custom operators*. It enables the demand-driven deployment, reconfiguration, and shutdown of applications in a Kubernetes cluster.
 
 The repository contains the following components:
 - **Application Manager**: The application manager is a ROS 2 node implemented in the [*application_manager*](./application_manager/) package. It acts as a ROS 2 action server and listens for incoming requests (`DeploymentRequests`) to deploy, reconfigure, or shutdown applications.
 - **Application Manager Interfaces**: The [*application_manager_interfaces*](./application_manager_interfaces/) package contains the ROS 2 action and message definitions containing the `DeploymentRequest` which is interpreted by the application manager.
 - **Custom Operators**: The code for the implemented [*Kopf*](https://kopf.readthedocs.io/en/latest/) operators together with the Kubernetes custom resource definitions (CRDs) is located in the [*custom-operators*](./custom-operators/) folder.
 
-The reference implementation contains the *Object Detection Fusion* application enabling collective environment perception. This application is applied in the experiment described in our research article mentioned below. The logic is extensible for new applications.
+The reference implementation in this repository contains the *Object Detection Fusion* application enabling collective environment perception. This application is applied in the experiment described in our [research paper](#research-paper). The logic is extensible for new applications.
 
 <p align="center">
   <img src="assets/application_management.png" alt="Image Description" width="100%">
 </p>
 
-The image above illustrates the architecture of the application management framework. The application manager and the custom operators are brought into action in the use case ["Collective Perception at Intersection"](https://github.com/ika-rwth-aachen/robotkube/tree/main/use-cases/collective-perception-intersection) in the scope of [**RobotKube**](https://github.com/ika-rwth-aachen/robotkube). We invite you to check out the code and run the use case.
+The image above illustrates the architecture of the application management framework. The application manager and the custom operators are brought into action in the use case ["Collective Perception at Intersection"](https://github.com/ika-rwth-aachen/robotkube/tree/main/use-cases/collective-perception-intersection) in the scope of [*RobotKube*](https://github.com/ika-rwth-aachen/robotkube). We invite you to check out the code and run the use case.
 
 
 > [!IMPORTANT]  
@@ -36,12 +36,13 @@ The image above illustrates the architecture of the application management frame
 > :email: ***opensource@ika.rwth-aachen.de***
 
 ## Quick Start
-
-> [!NOTE]
-> Check out the [repository RobotKube](https://github.com/ika-rwth-aachen/robotkube) containing executable use cases to see the application manager and the custom operators in action!  
-> Especially the use case ["Collective Perception at Intersection"](https://github.com/ika-rwth-aachen/robotkube/tree/main/use-cases/collective-perception-intersection) gives a good idea of their capabilities.
-
 Consider our [example](./example/) and see how to run the application manager in a Docker container orchestrating Kubernetes resources in a local Kubernetes cluster based on *k3d*.
+
+### RobotKube
+Check out the [repository RobotKube](https://github.com/ika-rwth-aachen/robotkube) containing executable use cases to see the application management framework in action. 
+
+Especially the use case ["Collective Perception at Intersection"](https://github.com/ika-rwth-aachen/robotkube/tree/main/use-cases/collective-perception-intersection) gives a good idea of the capabilities of the application manager and the custom operators.
+In the [repository](https://github.com/ika-rwth-aachen/robotkube), for each use case, you find a guide on how to run the use case in a local Kubernetes cluster. See for example [here](https://github.com/ika-rwth-aachen/robotkube/tree/main/use-cases/collective-perception-intersection#usage).
 
 ## Installation
 
@@ -69,19 +70,22 @@ docker run --rm ghcr.io/ika-rwth-aachen/application_manager:latest
 
 <details><summary><i>Click to show</i></summary>
 
-Consider the following steps:
-1. In the [*application_manager*](./application_manager/) package, create a new class in a new Python file located in the [`applications`](./application_manager/application_manager/applications/) folder. Include it in the [main file](./application_manager/application_manager/application_manager.py).
-1. Call the functions implemented in the new class for your application in the [main file](./application_manager/application_manager/application_manager.py) in `configure_custom_resource_deployments_applications()`.
-1. Depending on your needs, implement one or more new custom operators in the [`custom-operators`](./custom-operators/) folder.
-    1. Add one new Custom Resource Definition (CRD) (see for example [here](./custom-operators/object-fusion/custom-resource-definition/object_fusion_crd.yml)) per implemented operator.
-    1. Add the code of you new operator in the [`custom-operators`](./custom-operators/) folder. 
-1. Extend the ROS 2 message definition in the [*application_manager_interfaces*](./application_manager_interfaces/) package with your new application, especially [here](./application_manager_interfaces/msg/Application.msg). Consider what information is needed in the scope of the interface.
+The reference implementation of the application management framework in this repository is extensible for new applications. Depending on your use case, you can extend the application manager and/or implement new custom operators to support your application or to support another type of [*connection*](./application_manager/application_manager/connections/). An examplary application that we provide with the reference implementation is the [*Object Detection Fusion Application*](./application_manager/application_manager/applications/object_detection_fusion_app.py). In the example, the *Object Detection Fusion Application* involves services for *object detection*, *object fusion* and *MQTT clients* for data transmission. Therefore, so far, we implemented three custom opertors which operate the custom resources of those services.
+
+Consider the following steps to add support for a new application:
+1. In the [*application_manager*](./application_manager/) package, create a new class in a new Python file located in the [`applications`](./application_manager/application_manager/applications/) folder. There, you can implement application-specific configuration that is, e.g., interpreted from an incoming `DeploymentRequest`. As an example, see the [*Object Detection Fusion Application*](./application_manager/application_manager/applications/object_detection_fusion_app.py). Include the new class in the [main file](./application_manager/application_manager/application_manager.py). See, for example, [here](./application_manager/application_manager/application_manager.py#L14). Your implemented class should at least include a constructor (see, e.g., [here](./application_manager/application_manager/applications/object_detection_fusion_app.py#L9)) and a method generating the Kubernetes custom resource (see, e.g., [`generate_custom_resources()`](./application_manager/application_manager/applications/object_detection_fusion_app.py#L126)).
+1. In the [main file](./application_manager/application_manager/application_manager.py), in the method[`configure_custom_resource_deployments_applications()`](./application_manager/application_manager/application_manager.py#L207), add code (e.g., [here](./application_manager/application_manager/application_manager.py#L236)) for your new application where you initialize the new class you implemented in the previous step and call the method `generate_custom_resources()` of your new class. This method generates the Kubernetes custom resource for your application which is subsequently deployed by the application manager (see [here](./application_manager/application_manager/application_manager.py#L195)).
+1. When you implement a new application for which you need one or more new Kubernetes Custom Resource Definitions (CRDs), you need to implement new custom operators (one per new CRD) which operate the CRDs. Add the code for your new custom operators in the [`custom-operators`](./custom-operators/) folder. Consider the following steps:
+    1. Add one new Custom Resource Definition (CRD) (see, e.g., [here](./custom-operators/object-fusion/custom-resource-definition/object_fusion_crd.yml)) per implemented operator.
+    1. According to the control logic to operate the custom resource (see, e.g., [here](./custom-operators/object-fusion/operator/object_fusion_operator.py)), implement and add the code of your new operator in the [`custom-operators`](./custom-operators/) folder including a configuration file with which the user can provide parameters (see, e.g., [here](./custom-operators/object-fusion/operator/config.yml)).
+    1. Create a Dockerfile (see, e.g., [here](./custom-operators/object-fusion/Dockerfile)) based on which the Docker image of your operator is built via a [GitHub workflow](./.github/workflows/custom-operators.yml). The Docker image is then pushed to the [GitHub Container Registry](https://github.com/orgs/ika-rwth-aachen/packages?repo_name=application_manager).
+1. Extend the ROS 2 message definition in the [*application_manager_interfaces*](./application_manager_interfaces/) package with your new application, especially [here](./application_manager_interfaces/msg/Application.msg). Consider what information is needed and should be encoded in the `DeploymentRequest` to deploy your new application.
 
 </details>
 
-## Research Article
+## Research Paper
 Coming soon!
 
 ## Acknowledgements
 
-This work is accomplished within the projects *6GEM* (FKZ 16KISK036K) and *autotech.agil* (FKZ 01IS22088A). We acknowledge the financial support for the projects by the *Federal Ministry of Education and Research of Germany (BMBF)*.
+This work is accomplished within the projects *autotech.agil* (FKZ 01IS22088A) and *6GEM* (FKZ 16KISK036K). We acknowledge the financial support for the projects by the *Federal Ministry of Education and Research of Germany (BMBF)*.
