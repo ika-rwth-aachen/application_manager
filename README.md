@@ -84,7 +84,31 @@ Consider the following steps to add support for a new application:
 </details>
 
 ## Research Paper
-Coming soon!
+
+We hope our paper, data and code can help in your research. If this is the case, please cite our paper and give this repository a star ⭐.
+
+<details>
+<summary>BibTeX</summary>
+
+```
+@INPROCEEDINGS{Zanger2025ApplicationManagementinCITS,
+  author={Zanger, Lukas and Lampe, Bastian and Reiher, Lennart and Eckstein, Lutz},
+  booktitle={2025 IEEE 28th International Conference on Intelligent Transportation Systems (ITSC)}, 
+  title={Application Management in C-ITS: Orchestrating Demand-Driven Deployments and Reconfigurations}, 
+  year={2025},
+  pages={241-247},
+  doi={10.1109/ITSC60802.2025.11423445}}
+```
+</details>
+
+> **Application Management in C-ITS: Orchestrating Demand-Driven Deployments and Reconfigurations** ([IEEE Xplore](https://ieeexplore.ieee.org/document/11423445), [arXiv](https://arxiv.org/abs/2509.18793))
+>
+> [Lukas Zanger](https://www.ika.rwth-aachen.de/de/institut/team/fahrzeugintelligenz-automatisiertes-fahren/zanger.html), [Bastian Lampe](https://www.ika.rwth-aachen.de/de/institut/team/fahrzeugintelligenz-automatisiertes-fahren/lampe.html), [Lennart Reiher](https://www.ika.rwth-aachen.de/de/institut/team/fahrzeugintelligenz-automatisiertes-fahren/reiher.html), and [Lutz Eckstein](https://www.ika.rwth-aachen.de/de/institut/team/univ-prof-dr-ing-lutz-eckstein.html)
+>
+> [Institute for Automotive Engineering (ika), RWTH Aachen University](https://www.ika.rwth-aachen.de/en/)
+>
+> <sup>*Abstract* – Vehicles are becoming increasingly automated and interconnected, enabling the formation of cooperative intelligent transport systems (C-ITS) and the use of offboard services. As a result, cloud-native techniques, such as microservices and container orchestration, play an increasingly important role in their operation. However, orchestrating applications in a large-scale C-ITS poses unique challenges due to the dynamic nature of the environment and the need for efficient resource utilization. In this paper, we present a demand-driven application management approach that leverages cloud-native techniques – specifically Kubernetes – to address these challenges. Taking into account the demands originating from different entities within the C-ITS, the approach enables the automation of processes, such as deployment, reconfiguration, update, upgrade, and scaling of microservices. Executing these processes on demand can, for example, reduce computing resource consumption and network traffic. A demand may include a request for provisioning an external supporting service, such as a collective environment model. The approach handles changing and new demands by dynamically reconciling them through our proposed application management framework built on Kubernetes and the Robot Operating System (ROS 2). We demonstrate the operation of our framework in the C-ITS use case of collective environment perception and make the source code of the prototypical framework publicly available at [github.com/ika-rwth-aachen/application_manager](https://github.com/ika-rwth-aachen/application_manager).</sup>
+
 
 ## Acknowledgements
 
